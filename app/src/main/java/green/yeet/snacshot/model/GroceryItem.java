@@ -13,13 +13,12 @@ public class GroceryItem {
     private Map<String, Integer> commitmentDate;
     private Map<String, Integer> expirationDate;
     private Map<String, Double> nutrients;
-    private String uri_string;
 
 
     public GroceryItem(String name,
                        Map<String, Integer> commitmentDate, Map<String, Integer> expirationDate,
                        double calories, double totalFat, double cholesterol,
-                       double sodium, double potassium, double totalCarbohydrates, double sugars, double protein, String uri_string) {
+                       double sodium, double potassium, double totalCarbohydrates, double sugars, double protein) {
 
         this.name = name;
         this.commitmentDate = commitmentDate;
@@ -33,7 +32,6 @@ public class GroceryItem {
         this.nutrients.put("totalCarbohydrates", totalCarbohydrates);
         this.nutrients.put("sugars", sugars);
         this.nutrients.put("protein", protein);
-        this.uri_string = uri_string;
     }
 
     public GroceryItem(String json) {
@@ -67,8 +65,6 @@ public class GroceryItem {
             nutrients.put("sugars", jsonNutrients.getDouble("sugars"));
             nutrients.put("protein", jsonNutrients.getDouble("protein"));
             this.nutrients = nutrients;
-
-            this.uri_string = jsonGroceryItem.getString("uri_string");
 
         } catch(JSONException e) {
             e.printStackTrace();
@@ -105,7 +101,6 @@ public class GroceryItem {
             jsonNutrients.put("protein", this.nutrients.get("protein"));
             jsonGroceryItem.put("nutrients", jsonNutrients.toString());
 
-            jsonGroceryItem.put("uri_string", this.uri_string);
 
             return jsonGroceryItem.toString();
 
@@ -143,8 +138,5 @@ public class GroceryItem {
         return this.nutrients.get(key);
     }
 
-    public String getUriString() {
-        return this.uri_string;
-    }
 
 }
